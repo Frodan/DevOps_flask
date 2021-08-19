@@ -1,7 +1,10 @@
-Create ephemeral containers<br>
-Exclude with .dockerignore<br>
-Use multi-stage builds<br>
-Minimize the number of layers<br>
-Optimize for the Docker build cache<br>
-Build the smallest image possible<br>
-Properly tag your images<br>
+### Docker Best Practices
+
+- Do not use :latest
+- Create ephemeral containers
+- Exclude with .dockerignore
+- Use multi-stage builds
+- Minimize the number of layers
+- Optimize for the Docker build cache
+- Build the smallest image possible
+- Properly tag your images

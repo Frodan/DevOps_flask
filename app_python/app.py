@@ -33,9 +33,9 @@ def upload():
             filename = 'tmp.csv'
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'r') as wallets_file:
-                global unused_wallets
+                global unused_wallets, used_wallets
                 unused_wallets = [x.strip() for x in wallets_file.readlines()]
-                print(unused_wallets)
+                used_wallets = []
             return redirect('/stats')
     else:
         return '''
@@ -91,4 +91,4 @@ def get_stats():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=8000)
