@@ -11,12 +11,15 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-
+Build:
 ```bash
 docker build -t flask_app .
 docker run -e USER=<user> -e PASS=<pass> flask_app
 ```
-
+Or you can use ready image from docker hub:
+```bash
+docker run -e USER=<user> -e PASS=<pass> frodan/dev_ops
+```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
