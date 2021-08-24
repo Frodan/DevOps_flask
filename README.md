@@ -3,12 +3,7 @@
 This is a small web application, written on Python 3 for my friend, that is used for massive registration in crypto events.
 
 ## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
-
-```bash
-pip install -r requirements.txt
-```
+Install docker.
 
 ## Usage
 Build:
