@@ -1,8 +1,14 @@
 FROM python:3.8.2-slim-buster
 
+RUN adduser --disabled-password app --shell /bin/sh --home /home/app --quiet
+
 WORKDIR /usr/src/app
+
 COPY requirements.txt app.py ./
-RUN pip install --no-cache-dir -r requirements.txt && mkdir /usr/src/uploads
+
+USER app
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 

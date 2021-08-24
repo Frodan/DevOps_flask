@@ -3,14 +3,14 @@ from flask import Flask, flash, request, redirect
 from flask_httpauth import HTTPBasicAuth
 
 
-UPLOAD_FOLDER = '/usr/src/uploads'
+UPLOAD_FOLDER = '/tmp'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 auth = HTTPBasicAuth()
 
-username = os.environ['USER']
-password = os.environ['PASS']
+username = os.environ['USER_LOGIN']
+password = os.environ['USER_PASS']
 unused_wallets = []
 used_wallets = []
 
