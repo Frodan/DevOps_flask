@@ -32,5 +32,5 @@ jobs:
       -
         name: build and publish
         working-directory: ./app_python
-        run: docker build . --file Dockerfile --tag dev_ops:latest && docker push frodan/dev_ops:latest
+        run: docker build . --file Dockerfile --tag frodan/dev_ops && docker push frodan/dev_ops
 
