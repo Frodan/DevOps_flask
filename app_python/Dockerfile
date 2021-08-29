@@ -14,5 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 
-CMD [ "python",  "-m", "test.test_main"]
-#CMD [ "python", "./main.py" ]
+#CMD [ "python",  "-m", "test.test_main"]
+CMD [ "python", "./main.py" ]
