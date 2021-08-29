@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: python3 -m venv .
-    - run: pip install -r requirements.txt
+    - run: pip install -r app_python/requirements.txt
     - run: python -m unittest app_python/test/test_main.py 
 
 
