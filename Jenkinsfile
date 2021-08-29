@@ -1,14 +1,14 @@
 pipeline {
   agent none
   stages {
-    stage("Tests") {
-      agent any
-      steps {
-          sh 'python3 -m venv .'
-          sh 'pip install -r app_python/requirements.txt'
-          sh 'python -m unittest app_python/test/test_main.py'
-      }
-    }
+   //stage("Tests") {
+   //   agent any
+   //   steps {
+   //       sh 'python3 -m venv .'
+   //       sh 'pip install -r app_python/requirements.txt'
+   //       sh 'python -m unittest app_python/test/test_main.py'
+   //   }
+    //}
     stage('Docker Build') {
       agent any
       steps {
