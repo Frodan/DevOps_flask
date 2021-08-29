@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: python3 -m venv .
+    - run: python -m unittest app_python/test/test_main.py 
+
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file app_python/Dockerfile --tag DevOps_flask:$(date +%s)
+  
+  #publish:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: docker
+    
