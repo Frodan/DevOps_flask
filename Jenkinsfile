@@ -13,7 +13,7 @@ pipeline {
       agent any
       steps {
         dir('app_python'){
-          sh 'docker build . --file Dockerfile --tag frodan/dev_ops'
+          sh 'sudo docker build . --file Dockerfile --tag frodan/dev_ops'
         }
       }
     }
@@ -21,8 +21,8 @@ pipeline {
       agent any
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push frodan/dev_ops:latest'
+          sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'sudo docker push frodan/dev_ops:latest'
         }
       }
     }
