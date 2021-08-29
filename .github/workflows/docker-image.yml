@@ -16,13 +16,6 @@ jobs:
     - run: pip install -r app_python/requirements.txt
     - run: python -m unittest app_python/test/test_main.py
 
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-    - run: docker build . --file app_python/Dockerfile --tag dev_ops:latest
   
   build_and_publish:
     runs-on: ubuntu-latest
