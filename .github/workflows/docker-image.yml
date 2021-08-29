@@ -31,5 +31,6 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       -
         name: build and publish
-        run: docker build . --file app_python/Dockerfile --tag dev_ops:latest && docker push frodan/dev_ops:latest
+        working-directory: ./app_python
+        run: docker build . --file Dockerfile --tag dev_ops:latest && docker push frodan/dev_ops:latest
 
