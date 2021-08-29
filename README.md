@@ -1,4 +1,5 @@
 # Dev Ops Assignment
+[![Docker Image CI](https://github.com/Frodan/DevOps_flask/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Frodan/DevOps_flask/actions/workflows/docker-image.yml)
 
 This is a small web application, written on Python 3 for my friend, that is used for massive registration in crypto events.
 
