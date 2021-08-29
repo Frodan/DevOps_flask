@@ -1,14 +1,6 @@
 pipeline {
   agent none
   stages {
-   //stage("Tests") {
-   //   agent any
-   //   steps {
-   //       sh 'python3 -m venv .'
-   //       sh 'pip install -r app_python/requirements.txt'
-   //       sh 'python -m unittest app_python/test/test_main.py'
-   //   }
-    //}
     stage('Docker Build') {
       agent any
       steps {
@@ -16,6 +8,16 @@ pipeline {
           sh 'docker build . --file Dockerfile --tag frodan/dev_ops'
         }
       }
+    }
+    stage('test') {
+         agent {
+              docker {
+                   image 'qnib/pytest'
+              }
+         }
+         steps {
+              sh 'virtualenv venv && . venv/bin/activate && pip install -r app_python/requirements.txt && python app_python/test/test_main.py'
+         }
     }
     stage('Docker Push') {
       agent any
