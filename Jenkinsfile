@@ -9,7 +9,7 @@ pipeline {
             steps {
               dir('app_python'){
                 sh 'pip install -r requirements.txt'
-                sh 'python -m unittest test/test_main.py'
+                sh 'python test.py'
               }
             }
         }
