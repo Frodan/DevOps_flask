@@ -19,7 +19,7 @@ docker run -e USER_LOGIN=<user> -e USER_PASS=<pass> frodan/dev_ops
 
 Tests:
 ```bash
-python -m unittest test.py
+python test.py
 ```
 ## Routes
 - Port: 8000
