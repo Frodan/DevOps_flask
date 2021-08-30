@@ -4,13 +4,15 @@ pipeline {
             image 'python:3.8.2-alpine'
         }
     }
+    environment {
+            USER_LOGIN = 'test'
+            USER_PASS = 'test'
+        }
     stages {
         stage('Test') {
             steps {
               dir('app_python'){
                 sh 'pip install -r requirements.txt'
-                sh 'export USER_LOGIN=test'
-                sh 'export USER_PASS=test'
                 sh 'python test.py'
               }
             }
