@@ -1,15 +1,15 @@
 pipeline {
-  agent {
-    docker {
-      image 'python:3.8.2-alpine'
-    }
-  }
   environment {
     USER_LOGIN = 'test'
     USER_PASS = 'test'
   }
   stages {
     stage('Test') {
+      agent {
+        docker {
+          image 'python:3.8.2-alpine'
+        }
+      }
       steps {
         dir('app_python'){
           sh 'pip install -r requirements.txt'
