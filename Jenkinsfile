@@ -9,6 +9,8 @@ pipeline {
             steps {
               dir('app_python'){
                 sh 'pip install -r requirements.txt'
+                sh 'export USER_LOGIN=test'
+                sh 'export USER_PASS=test'
                 sh 'python test.py'
               }
             }
