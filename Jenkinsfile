@@ -1,4 +1,5 @@
 pipeline {
+  agent any
   environment {
     USER_LOGIN = 'test'
     USER_PASS = 'test'
