@@ -8,7 +8,6 @@ pipeline {
         stage('Test') {
             steps {
               dir('app_python'){
-                sh 'python pip install --upgrade pip'
                 sh 'pip install -r requirements.txt'
                 sh 'python -m unittest test/test_main.py'
               }
