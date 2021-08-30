@@ -16,7 +16,7 @@ pipeline {
         }
     }
 }
-
+// fuck jenkins
 // pipeline {
 //   agent none
 //   stages {
