@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from app_python import main
+import main
 
 
 class MyTestCase(unittest.TestCase):
