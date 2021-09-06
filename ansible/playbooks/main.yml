@@ -1,0 +1,6 @@
+---
+- name: "FlaskApp"
+  hosts: all
+  roles:
+    - role: ../../roles/install_docker
+      become: true
