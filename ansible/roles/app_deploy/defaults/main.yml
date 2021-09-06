@@ -1,0 +1,2 @@
+app_login: "{{lookup('env', 'USER_LOGIN')}}"
+app_pass: "{{lookup('env', 'USER_PASS')}}"

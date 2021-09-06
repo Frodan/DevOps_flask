@@ -1,0 +1,44 @@
+---
+- name: Ensure python is installed.
+  become: true
+  package:
+    name: "python3"
+    state: present
+
+- name: Ensure Pip is installed.
+  become: true
+  package:
+    name: "python3-pip"
+    state: present
+
+- name: Install docker libraries
+  pip:
+    name:
+      - docker==5.0.2
+      - docker-compose==1.29.2
+    state: present
+
+
+- name: Ensure directory for application
+  become: true
+  file:
+    owner: "{{ ansible_user_id }}"
+    path: /opt/app/
+    state: directory
+    mode: 0755
+
+- name: Copy docker-compose
+  copy:
+    src: ../../../../app_python/docker-compose.yml
+    dest: /opt/app/docker-compose.yml
+    mode: u=rw,g=r,o=r
+
+- name: Run docker-compose
+  community.docker.docker_compose:
+    pull: true
+    recreate: always
+    state: present
+    project_src: /opt/app/
+  environment:
+    USER_LOGIN: "{{app_login}}"
+    USER_PASS: "{{app_pass}}"

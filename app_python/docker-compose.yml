@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    image: frodan/dev_ops:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - USER_LOGIN=${USER_LOGIN}
+      - USER_PASS=${USER_PASS}
