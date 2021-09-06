@@ -38,3 +38,16 @@
 
 - include_tasks: docker-users.yml
   when: docker_users | length > 0
+
+- name: Ensure Pip is installed.
+  become: true
+  package:
+    name: "python3-pip"
+    state: present
+
+- name: Install docker libraries
+  pip:
+    name:
+      - docker==5.0.2
+      - docker-compose==1.29.2
+    state: present
