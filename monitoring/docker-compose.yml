@@ -4,8 +4,38 @@ networks:
   monitoring:
 
 services:
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=14d'
+      - '--web.enable-lifecycle'
+      - '--storage.tsdb.wal-compression'
+      - '--storage.tsdb.max-block-duration=4h'
+      - '--storage.tsdb.wal-segment-size=60MB'
+      - '--storage.tsdb.allow-overlapping-blocks'
+      - '--query.max-samples=5000000'
+    restart: unless-stopped
+    expose:
+      - 9090
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M
+
   loki:
-    image: grafana/loki:2.3.0
+    image: grafana/loki:${LOKI_VERSION}
     ports:
       - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
@@ -20,11 +50,17 @@ services:
         max-size: "100m"
         max-file: "10"
         tag: "{{.ImageName}}|{{.Name}}"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M
+
 
   promtail:
     depends_on:
       - loki
-    image: grafana/promtail:2.3.0
+    image: grafana/promtail:${LOKI_VERSION}
     volumes:
       - ./promtail.yml:/etc/promtail/promtail.yml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -42,9 +78,15 @@ services:
         max-size: "100m"
         max-file: "10"
         tag: "{{.ImageName}}|{{.Name}}"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M
+
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:${GRAFANA_VERSION}
     ports:
       - "3000:3000"
     volumes:
@@ -57,8 +99,15 @@ services:
         max-size: "100m"
         max-file: "10"
         tag: "{{.ImageName}}|{{.Name}}"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M
+
 
 volumes:
+  prometheus-data: {}
   grafana-data: {}
   loki-data: {}
   promtail-data: {}
