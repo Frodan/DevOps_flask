@@ -17,16 +17,16 @@ https://github.com/black-rosary/loki-nginx
   ![](screenshots/app_logs.png) 
 
 - Docker ps lab 7
-![](screenshots/docker_ps.png) 
+  ![](screenshots/docker_ps.png) 
 
 - Working Prometheus
   ![](screenshots/prometheus.png) 
 
 - First Dashboard
   ![](screenshots/dashboard_1.png)
-- 
+ 
 - Second Dashboard
   ![](screenshots/dashboard2.png)
 
 - Logs From All containers
-  ![](screenshots/logs_from_all_containers.png) 
+  ![](screenshots/logs_from_all_containers.png)
