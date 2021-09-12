@@ -1,9 +1,22 @@
 version: '3'
+
 services:
   app:
+    build: .
     image: frodan/dev_ops:latest
     ports:
       - "8000:8000"
     environment:
       - USER_LOGIN=${USER_LOGIN}
       - USER_PASS=${USER_PASS}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+        tag: "{{.ImageName}}|{{.Name}}"
