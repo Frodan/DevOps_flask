@@ -2,15 +2,19 @@ import os
 from flask import Flask, flash, request, redirect
 from flask_httpauth import HTTPBasicAuth
 
-
 UPLOAD_FOLDER = '/tmp'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 auth = HTTPBasicAuth()
 
-username = os.environ['USER_LOGIN']
-password = os.environ['USER_PASS']
+try:
+    username = os.environ['USER_LOGIN']
+    password = os.environ['USER_PASS']
+except:
+    username = "test"
+    password = "test"
+
 unused_wallets = []
 used_wallets = []
 
@@ -82,7 +86,7 @@ def get_wallet():
 @auth.login_required
 def get_stats():
     return f"""
-        Used wallets: {len (used_wallets)}<br>
+        Used wallets: {len(used_wallets)}<br>
         Unused wallets: {len(unused_wallets)}<br>
         <br>
         Used:<br> 
