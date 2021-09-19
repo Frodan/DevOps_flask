@@ -53,7 +53,7 @@ def upload():
     '''
 
 
-@app.route('/get_wallet', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_wallet():
     if not unused_wallets:
         return "No wallets"
