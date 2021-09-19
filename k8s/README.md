@@ -13,3 +13,7 @@ service/kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP       
 ```
 ### With configs
 ![](screenshots/output.png)
+### With Helm
+![](screenshots/app.png)
+![](screenshots/chart_output.png)
+![](screenshots/workloads.png)
