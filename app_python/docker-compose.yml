@@ -1,9 +1,14 @@
 version: '3'
 
+volumes:
+  app-data: {}
+
 services:
   app:
     build: .
     image: frodan/dev_ops:latest
+    volumes:
+      - app-data:/usr/src/app_python
     ports:
       - "8000:8000"
     environment:

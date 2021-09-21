@@ -3,18 +3,23 @@
 
 This is a small web application, written on Python 3 for my friend, that is used for massive registration in crypto events.
 
+## Usage
+1. Go to /upload. Login and upload a csv file with wallets addresses.
+2. After upload, workers can get wallet address for registration account by hands on /get_wallet.
+Every wallet address shows only once.
+3. Authenticated user can see some stats, used and unused wallets in /stats. 
+
 ## Installation
 Install docker.
 
-## Usage
 Build:
 ```bash
 docker build -t flask_app .
-docker run -e USER_LOGIN=<user> -e USER_PASS=<pass> flask_app
+docker run -e USER_LOGIN=<user> -e USER_PASS=<pass>  -p 8000:8000 flask_app
 ```
 Or you can use ready image from docker hub:
 ```bash
-docker run -e USER_LOGIN=<user> -e USER_PASS=<pass> frodan/dev_ops
+docker run -e USER_LOGIN=<user> -e USER_PASS=<pass>  -p 8000:8000 frodan/dev_ops
 ```
 
 Tests:
@@ -23,9 +28,9 @@ python test.py
 ```
 ## Routes
 - Port: 8000
-- /uploads - upload csv to site
+- /upload - upload csv to site
 - /stats - stats of used wallets
-- / - show wallet
+- /get_wallet - show wallet
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
