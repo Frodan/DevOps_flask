@@ -8,7 +8,7 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   serviceName: {{ .Values.serviceName}}
   replicas: {{ .Values.replicaCount }}
-  podManagementPolicy: { { .Values.podManagementPolicy } }
+  podManagementPolicy: {{ .Values.podManagementPolicy }}
   {{- end }}
 
   selector:
@@ -38,6 +38,20 @@ spec:
       serviceAccountName: {{ include "flask-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: install
+          image: busybox
+          command:
+            - wget
+            - "-O"
+            - "/inittest/index.html"
+            - http://info.cern.ch
+          volumeMounts:
+            - name: inittest
+              mountPath: "/inittest"
+      volumes:
+        - name: inittest
+          emptyDir: { }
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -47,6 +61,8 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /tmp
+            - name: inittest
+              mountPath: /inittest
           env:
             - name: USER_LOGIN
               valueFrom:
@@ -71,11 +87,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: { { .Values.ProbeUrl } }
+              path: {{ .Values.ProbeUrl }}
               port: http
           readinessProbe:
             httpGet:
-              path: {{ .Values.ProbeUrl}}
+              path: {{ .Values.ProbeUrl }}
               port: http
       {{- with .Values.nodeSelector }}
       nodeSelector:
