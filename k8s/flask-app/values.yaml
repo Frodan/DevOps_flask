@@ -2,7 +2,11 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+
+replicaCount: 3
+serviceName: "app"
+podManagementPolicy: Parallel
+ProbeUrl: /get_wallet
 
 image:
   repository: frodan/dev_ops
@@ -37,7 +41,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
+  name: app
+  type: LoadBalancer
   port: 8000
 
 ingress:

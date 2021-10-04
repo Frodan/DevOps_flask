@@ -1,6 +1,8 @@
 import os
+import datetime
 from flask import Flask, flash, request, redirect
 from flask_httpauth import HTTPBasicAuth
+from collections import Counter
 
 UPLOAD_FOLDER = '/tmp'
 
@@ -12,8 +14,8 @@ try:
     username = os.environ['USER_LOGIN']
     password = os.environ['USER_PASS']
 except:
-    username = "test"
-    password = "test"
+    username = "borov"
+    password = "borov"
 
 users = {
     username: password
@@ -99,7 +101,7 @@ def get_wallet():
     else:
         print(unused_wallets)
         wallet = unused_wallets.pop()
-        used_wallets[wallet] = auth.username()
+        used_wallets[wallet] = (auth.username(), datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         return f'''
         <!doctype html>
         <title>Wallet</title>
@@ -126,13 +128,16 @@ def get_wallet():
 def get_stats():
     if auth.username() != username:
         return "Not an admin"
+    counter_str =[f"{x} : {y}" for x,y in Counter([z[0] for z in used_wallets.values()]).items()]
     wallets_to_print = [f"{x} : {used_wallets[x]}" for x in used_wallets.keys()]
     return f"""
         Users" {users}<br>
         Used wallets: {len(used_wallets)}<br>
         Unused wallets: {len(unused_wallets)}<br>
         <br>
-        Used:<br> 
+        Used:<br>
+        {"<br><br>".join(counter_str)}
+        <br><br>
         {"<br><br>".join(wallets_to_print)}
     """
 
